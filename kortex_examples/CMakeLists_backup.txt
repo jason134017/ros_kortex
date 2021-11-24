@@ -6,31 +6,7 @@ add_compile_options(-std=c++11)
 add_definitions(-D_OS_UNIX)
 
 ## Find catkin and any catkin packages
-find_package(catkin REQUIRED 
-  COMPONENTS 
-    roscpp 
-    rospy 
-    std_msgs 
-    message_generation 
-    actionlib_msgs 
-    actionlib 
-    kortex_driver
-    interactive_markers
-    moveit_core
-    moveit_visual_tools
-    moveit_ros_planning
-    moveit_ros_planning_interface
-    moveit_ros_perception
-    pluginlib
-    geometric_shapes
-    pcl_ros
-    pcl_conversions
-    rosbag
-    tf2_ros
-    tf2_eigen
-    tf2_geometry_msgs
-)
-
+find_package(catkin REQUIRED COMPONENTS roscpp rospy std_msgs message_generation actionlib_msgs actionlib kortex_driver)
 
 ## Declare a catkin package
 catkin_package()
@@ -63,11 +39,6 @@ add_executable(example_waypoint_action_client_cpp src/full_arm/example_waypoint_
 add_dependencies(example_waypoint_action_client_cpp ${catkin_EXPORTED_TARGETS})
 target_link_libraries(example_waypoint_action_client_cpp ${catkin_LIBRARIES} )
 
-#new
-add_executable(move_it_commander_cpp src/move_it/move_it_commander.cpp)
-add_dependencies(move_it_commander_cpp ${catkin_EXPORTED_TARGETS})
-target_link_libraries(move_it_commander_cpp ${catkin_LIBRARIES} )
-
 if(CATKIN_ENABLE_TESTING)
 	find_package(rostest REQUIRED)
 	catkin_add_gtest(kortex_examples_tests src/tests/kortex_examples_tests.cc)
@@ -93,7 +64,6 @@ install(TARGETS
     example_full_arm_movement_cpp
     example_cartesian_poses_with_notifications_cpp
     example_waypoint_action_client_cpp
-    move_it_commander_cpp
     ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
